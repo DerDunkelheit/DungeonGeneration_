@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfccc7538bd3c04d8c40b458660ab22, type: 3}
+  m_Name: NPCSCavangerTheHistoryOfThisPlace
+  m_EditorClassIdentifier: 
+  NpcName: Scavanger
+  sentences:
+  - 'this place was corrupted and captured by a lot of possessed demons and other
+    shit controlled by some entity from the other world. '
+  - no one knows how the hell it happened. but many villagers have been attacked
+    by these demons that breed here
+  - this place has seen a lot of brave people who wanted to stop it. but no one came
+    back. if you go deeper you can find a lot of their bones
