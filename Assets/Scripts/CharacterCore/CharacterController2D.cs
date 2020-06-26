@@ -1,46 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CharacterController2D : MonoBehaviour
+namespace CharacterCore
 {
-    public Vector2 CurrentMovement { get; set; }
-    public bool NormalMovement { get; set; }
-
-    Rigidbody2D rb;
-
-    void Awake()
+    public class CharacterController2D : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        public Vector2 CurrentMovement { get; set; }
+        public bool NormalMovement { get; set; }
 
-    void Start()
-    {
-        NormalMovement = true;
-    }
+        Rigidbody2D rb;
 
-    void FixedUpdate()
-    {
-        if (NormalMovement)
+        void Awake()
         {
-            MoveCharacter();
+            rb = GetComponent<Rigidbody2D>();
         }
-    }
+
+        void Start()
+        {
+            NormalMovement = true;
+        }
+
+        void FixedUpdate()
+        {
+            if (NormalMovement)
+            {
+                MoveCharacter();
+            }
+        }
 
 
-    private void MoveCharacter()
-    {
-        Vector2 currentMovePosition = rb.position + CurrentMovement * Time.fixedDeltaTime;
-        rb.MovePosition(currentMovePosition);
-    }
+        private void MoveCharacter()
+        {
+            Vector2 currentMovePosition = rb.position + CurrentMovement * Time.fixedDeltaTime;
+            rb.MovePosition(currentMovePosition);
+        }
 
-    public void MovePostition(Vector2 newPosition)
-    {
-        rb.MovePosition(newPosition);
-    }
+        public void MovePostition(Vector2 newPosition)
+        {
+            rb.MovePosition(newPosition);
+        }
 
-    public void SetMovement(Vector2 newPosition)
-    {
-        CurrentMovement = newPosition;
+        public void SetMovement(Vector2 newPosition)
+        {
+            CurrentMovement = newPosition;
+        }
     }
 }

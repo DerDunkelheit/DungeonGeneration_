@@ -1,100 +1,103 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
-public class Hunger : MonoBehaviour
+namespace Player_Abilities_Stats.Hunger
 {
-    public bool enableHunger = true;
-
-    public int maxHunger = 5;
-    [Tooltip("In Seconds")] [Range(5, 100)] [SerializeField] float hungerTick = 30f;
-    [Tooltip("In Seconds")] [SerializeField] float healthTick = 30f;
-
-    [HideInInspector] public bool canTakeDamageFromHunger;
-
-    Health playerHealth;
-    int currentHunget;
-    Coroutine hugerRoutine;
-    float time;
-
-    public int CurrentHunger
+    public class Hunger : MonoBehaviour
     {
-        get => currentHunget;
-        set
+        public bool enableHunger = true;
+
+        public int maxHunger = 5;
+        [Tooltip("In Seconds")] [Range(5, 100)] [SerializeField] float hungerTick = 30f;
+        [Tooltip("In Seconds")] [SerializeField] float healthTick = 30f;
+
+        [HideInInspector] public bool canTakeDamageFromHunger;
+
+        Health.Health playerHealth;
+        int currentHunget;
+        Coroutine hugerRoutine;
+        float time;
+
+        public int CurrentHunger
         {
-            if (value > maxHunger)
+            get => currentHunget;
+            set
             {
-                currentHunget = maxHunger;
-            }
-            else
-            {
-                currentHunget = value;
-            }
+                if (value > maxHunger)
+                {
+                    currentHunget = maxHunger;
+                }
+                else
+                {
+                    currentHunget = value;
+                }
 
+            }
         }
-    }
 
-    void Start()
-    {
-        playerHealth = this.GetComponent<Health>();
+        void Start()
+        {
+            playerHealth = this.GetComponent<Health.Health>();
 
-        CurrentHunger = maxHunger;
-        UIManager.Instance.UpdatePlayerHungerUI(CurrentHunger, maxHunger);
+            CurrentHunger = maxHunger;
+            UIManager.Instance.UpdatePlayerHungerUI(CurrentHunger, maxHunger);
 
     
             hugerRoutine = StartCoroutine(IEHunger(hungerTick));
             time = hungerTick;
         
-    }
+        }
 
-    void Update()
-    {
-        if (canTakeDamageFromHunger && enableHunger)
+        void Update()
         {
-            if (time <= 0)
+            if (canTakeDamageFromHunger && enableHunger)
             {
-                playerHealth.TakeDamage(1);
+                if (time <= 0)
+                {
+                    playerHealth.TakeDamage(1);
+                    time = healthTick;
+                }
+                else
+                {
+                    time -= Time.deltaTime;
+                }
+            }
+        }
+
+        public void AddHunget(int amount)
+        {
+            CurrentHunger += amount;
+            UIManager.Instance.UpdatePlayerHungerUI(CurrentHunger, maxHunger);
+
+            if (CurrentHunger > 0)
+            {
+                canTakeDamageFromHunger = false;
                 time = healthTick;
             }
-            else
-            {
-                time -= Time.deltaTime;
-            }
         }
-    }
 
-    public void AddHunget(int amount)
-    {
-        CurrentHunger += amount;
-        UIManager.Instance.UpdatePlayerHungerUI(CurrentHunger, maxHunger);
 
-        if (CurrentHunger > 0)
+
+        private IEnumerator IEHunger(float tickTime)
         {
-            canTakeDamageFromHunger = false;
-            time = healthTick;
-        }
-    }
-
-
-
-    private IEnumerator IEHunger(float tickTime)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(tickTime);
-
-            if (CurrentHunger > 0 && enableHunger)
+            while (true)
             {
-                CurrentHunger--;
-                UIManager.Instance.UpdatePlayerHungerUI(CurrentHunger, maxHunger);
-            }
+                yield return new WaitForSeconds(tickTime);
 
-            if (CurrentHunger == 0)
-            {
-                canTakeDamageFromHunger = true;
+                if (CurrentHunger > 0 && enableHunger)
+                {
+                    CurrentHunger--;
+                    UIManager.Instance.UpdatePlayerHungerUI(CurrentHunger, maxHunger);
+                }
+
+                if (CurrentHunger == 0)
+                {
+                    canTakeDamageFromHunger = true;
+                }
             }
         }
+
+
     }
-
-
 }

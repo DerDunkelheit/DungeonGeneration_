@@ -1,28 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Player_Abilities_Stats.Health;
 using UnityEngine;
 
-public class HealthPotion : PickupObjectBase,IPickupable
+namespace Objects.PickUpableObjects
 {
-    [SerializeField] int healthToAdd = 1;
-
-    Health playerHealth;
-
-    public void Pickup() //Interface's method
+    public class HealthPotion : PickupObjectBase,IPickupable
     {
-        playerHealth.Heal(healthToAdd);
-    }
+        [SerializeField] int healthToAdd = 1;
 
-    protected override void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.CompareTag("Player"))
+        Health playerHealth;
+
+        public void Pickup() //Interface's method
         {
-            playerHealth = other.GetComponent<Health>();
+            playerHealth.Heal(healthToAdd);
+        }
 
-            if(!playerHealth.CheckPlayerHealth())
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            if(other.gameObject.CompareTag("Player"))
             {
-                Pickup();
-                Destroy(this.gameObject);
+                playerHealth = other.GetComponent<Health>();
+
+                if(!playerHealth.CheckPlayerHealth())
+                {
+                    Pickup();
+                    Destroy(this.gameObject);
+                }
             }
         }
     }

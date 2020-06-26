@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CharacterCore;
+using Player_Abilities_Stats.Health;
+using Player_Abilities_Stats.Hunger;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine;

@@ -1,28 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Enemies;
+using Player_Abilities_Stats.Health;
 using UnityEngine;
 
-public abstract class Attack : MonoBehaviour,IAttack
+namespace Attacking
 {
-    public enum AttackType
+    public abstract class Attack : MonoBehaviour,IAttack
     {
-        Meele,
-        Range
-    };
+        public enum AttackType
+        {
+            Meele,
+            Range
+        };
 
-    [Header("Genetal Fields")]
-    public AttackType attackType = AttackType.Meele;
-    public float dmgAmount = 1;
+        [Header("Genetal Fields")]
+        public AttackType attackType = AttackType.Meele;
+        public float dmgAmount = 1;
 
-    protected Health playerHealth;
-    protected EnemyPathfinding enemyPathfinding;
+        protected Health playerHealth;
+        protected EnemyPathfinding enemyPathfinding;
 
-    protected virtual void Start()
-    {
-        playerHealth = GameObject.FindWithTag("Player").GetComponent<Health>();
-        enemyPathfinding = this.GetComponent<EnemyPathfinding>();
+        protected virtual void Start()
+        {
+            playerHealth = GameObject.FindWithTag("Player").GetComponent<Health>();
+            enemyPathfinding = this.GetComponent<EnemyPathfinding>();
+        }
+
+        public abstract void DoAttack();
     }
-
-    public abstract void DoAttack();
 }
 

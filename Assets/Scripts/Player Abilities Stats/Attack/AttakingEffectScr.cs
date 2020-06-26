@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AttakingEffectScr : MonoBehaviour
+namespace Player_Abilities_Stats.Attack
 {
-
-
-
-    public void TurnOffThisGo()// this method is used on each player Attacking amins.
+    public class AttakingEffectScr : MonoBehaviour
     {
-        this.gameObject.SetActive(false);
+
+
+
+        public void TurnOffThisGo()// this method is used on each player Attacking amins.
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

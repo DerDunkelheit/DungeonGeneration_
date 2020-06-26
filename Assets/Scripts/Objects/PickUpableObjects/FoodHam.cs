@@ -1,30 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Player_Abilities_Stats.Hunger;
 using UnityEngine;
 
-public class FoodHam : PickupObjectBase,IPickupable
+namespace Objects.PickUpableObjects
 {
-    [SerializeField] int hungerToAdd = 1;
-
-    Hunger playerHunger;
-
-    public void Pickup()
+    public class FoodHam : PickupObjectBase,IPickupable
     {
-        playerHunger.AddHunget(hungerToAdd);
-    }
+        [SerializeField] int hungerToAdd = 1;
 
-    protected override void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.CompareTag("Player"))
+        Hunger playerHunger;
+
+        public void Pickup()
         {
-            playerHunger = other.GetComponent<Hunger>();
+            playerHunger.AddHunget(hungerToAdd);
+        }
 
-            if(playerHunger.CurrentHunger != playerHunger.maxHunger)
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            if(other.gameObject.CompareTag("Player"))
             {
-                Pickup();
-                Destroy(this.gameObject);
+                playerHunger = other.GetComponent<Hunger>();
+
+                if(playerHunger.CurrentHunger != playerHunger.maxHunger)
+                {
+                    Pickup();
+                    Destroy(this.gameObject);
+                }
             }
         }
-    }
 
+    }
 }

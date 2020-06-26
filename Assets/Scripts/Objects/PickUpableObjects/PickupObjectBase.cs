@@ -1,16 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class PickupObjectBase : MonoBehaviour
+namespace Objects.PickUpableObjects
 {
-
-
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    public abstract class PickupObjectBase : MonoBehaviour
     {
-        if(other.gameObject.CompareTag("Player"))
+
+
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("Player");
+            if(other.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Player");
+            }
         }
     }
 }

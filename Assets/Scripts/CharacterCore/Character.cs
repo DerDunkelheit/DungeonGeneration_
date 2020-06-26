@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Character : MonoBehaviour
+namespace CharacterCore
 {
-    public enum CharacterType
+    public class Character : MonoBehaviour
     {
-        Player,
-        AI
-    };
+        public enum CharacterType
+        {
+            Player,
+            AI
+        };
 
-    [SerializeField] CharacterType characterTypes = CharacterType.AI;
+        [SerializeField] CharacterType characterTypes = CharacterType.AI;
 
 
-    public CharacterType characterType => characterTypes;
+        public CharacterType characterType => characterTypes;
+    }
 }

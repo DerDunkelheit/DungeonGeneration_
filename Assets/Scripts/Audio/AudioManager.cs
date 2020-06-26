@@ -1,41 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace Audio
 {
-    public static AudioManager instance;
-
-    [SerializeField] AudioSource[] levelMusics = null;
-    [SerializeField] AudioSource[] SFX = null;
-
-    AudioSource audioSource;
-
-    void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        if (instance == null)
+        public static AudioManager instance;
+
+        [SerializeField] AudioSource[] levelMusics = null;
+        [SerializeField] AudioSource[] SFX = null;
+
+        AudioSource audioSource;
+
+        void Awake()
         {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
-        else
+
+        private void PlayMainMusic(int index)
         {
-            Destroy(this.gameObject);
+            levelMusics[index].loop = true;
+            levelMusics[index].Play();
         }
+
+        public void PlaySfx(int numberOfSfx)
+        {
+            SFX[numberOfSfx].Stop();
+            SFX[numberOfSfx].Play();
+        }
+
+
+
     }
-
-    private void playMainMusic(int index)
-    {
-        levelMusics[index].loop = true;
-        levelMusics[index].Play();
-    }
-
-    public void PlaySfx(int numberOfSfx)
-    {
-        SFX[numberOfSfx].Stop();
-        SFX[numberOfSfx].Play();
-    }
-
-
-
 }

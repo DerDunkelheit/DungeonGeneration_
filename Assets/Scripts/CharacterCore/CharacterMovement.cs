@@ -1,70 +1,71 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CharacterMovement : CharacterComponents
+namespace CharacterCore
 {
-    [Header("General Settings")]
-    [Tooltip("This firld is used in start Func, changing this value in game will get nothing")] public float startWalkSpeed = 7f;
-
-    [Header("Animation Fields")]
-    public bool enableAnimation = false;
-
-    public float MoveSpeed { get; set; }
-
-    private readonly int RunParametr = Animator.StringToHash("Run"); //The string to convert to Id.
-
-    protected override void Start()
+    public class CharacterMovement : CharacterComponents
     {
-        base.Start();
-        MoveSpeed = startWalkSpeed;
-    }
+        [Header("General Settings")]
+        [Tooltip("This firld is used in start Func, changing this value in game will get nothing")] public float startWalkSpeed = 7f;
 
+        [Header("Animation Fields")]
+        public bool enableAnimation = false;
 
-    protected override void HandleAbility()
-    {
-        base.HandleAbility();
-        MoveCharacter();
+        public float MoveSpeed { get; set; }
 
-        if(enableAnimation)
+        private readonly int RunParametr = Animator.StringToHash("Run"); //The string to convert to Id.
+
+        protected override void Start()
         {
-            UpdateAnimations();
+            base.Start();
+            MoveSpeed = startWalkSpeed;
         }
-    }
 
-    private void MoveCharacter()
-    {
-        Vector2 movement = new Vector2(horizontalInput, verticalInput);
-        Vector2 moveInput = movement;
-        Vector2 movementNormalized = moveInput.normalized;
-        Vector2 movementSpeed = movementNormalized * MoveSpeed;
-        controller.SetMovement(movementSpeed);
-    }
 
-    public void UpdateAnimations()
-    {
-        if (Mathf.Abs(horizontalInput) > 0.1f)
+        protected override void HandleAbility()
         {
-            anim.SetBool(RunParametr, true);
+            base.HandleAbility();
+            MoveCharacter();
+
+            if(enableAnimation)
+            {
+                UpdateAnimations();
+            }
         }
-        else
+
+        private void MoveCharacter()
         {
-            anim.SetBool(RunParametr, false);
+            Vector2 movement = new Vector2(horizontalInput, verticalInput);
+            Vector2 moveInput = movement;
+            Vector2 movementNormalized = moveInput.normalized;
+            Vector2 movementSpeed = movementNormalized * MoveSpeed;
+            controller.SetMovement(movementSpeed);
         }
-    }
 
-    public void ResetSpeed()
-    {
-        MoveSpeed = startWalkSpeed;
-    }
+        public void UpdateAnimations()
+        {
+            if (Mathf.Abs(horizontalInput) > 0.1f)
+            {
+                anim.SetBool(RunParametr, true);
+            }
+            else
+            {
+                anim.SetBool(RunParametr, false);
+            }
+        }
 
-    public void SetHorizontal(float value)
-    {
-        horizontalInput = value;
-    }
+        public void ResetSpeed()
+        {
+            MoveSpeed = startWalkSpeed;
+        }
 
-    public void SetVertical(float value)
-    {
-        verticalInput = value;
+        public void SetHorizontal(float value)
+        {
+            horizontalInput = value;
+        }
+
+        public void SetVertical(float value)
+        {
+            verticalInput = value;
+        }
     }
 }
