@@ -1081,8 +1081,8 @@ MonoBehaviour:
   itemSpawnPercent: 5
   interactiveItems:
   - {fileID: 5620779275983364737, guid: adfd3a262da0c1c48ad30ddcce612518, type: 3}
-  - {fileID: 8788408952553819493, guid: e5bca9c9dfd867f4383b8480cd13500a, type: 3}
-  - {fileID: 8493635450695723937, guid: 181df4e9a7620bb42bb64651ea7216ac, type: 3}
+  - {fileID: 990460337225390485, guid: 807e1a698d6dba54699604aace33782f, type: 3}
+  - {fileID: 3311785594857567616, guid: 43d0a75d79b80094490ae191b41f1158, type: 3}
   interactiveItemsCount:
     minimum: 1
     maximum: 7

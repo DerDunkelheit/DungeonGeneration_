@@ -8,6 +8,7 @@ TagManager:
   - Dungeon Manager
   - Enemy
   - InventoryCanvas
+  - UiInventory
   layers:
   - Default
   - TransparentFX

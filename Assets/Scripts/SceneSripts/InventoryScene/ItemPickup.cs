@@ -22,6 +22,11 @@ public class ItemPickup : MonoBehaviour
     {
         ui_Inventory = FindObjectOfType<UI_Inventory>();
 
+        if (ui_Inventory == null)
+        {
+            Debug.Log("Ui inventory is null");
+        }
+        
         item = new Item { itemType = thisItemType, amount = 1, maxStack = maxStack };
 
         currentSprite = this.GetComponent<SpriteRenderer>().sprite;
@@ -54,6 +59,7 @@ public class ItemPickup : MonoBehaviour
                 if (playerInventory.inventory.isSlotFull[i] == false)
                 {
                     playerInventory.inventory.isSlotFull[i] = true;
+
                     GameObject itemImageInInventory = Instantiate(ui_Inventory.itemSlotTemplatePrefab, playerInventory.inventory.slots[i].transform, false);
                     itemImageInInventory.transform.Find("image").GetComponent<Image>().sprite = item.GetSprite();
                     InventorySlot invSlot = playerInventory.inventory.slots[i].GetComponent<InventorySlot>();

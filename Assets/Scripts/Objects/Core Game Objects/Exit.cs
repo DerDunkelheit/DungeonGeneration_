@@ -52,6 +52,7 @@ public class Exit : InteractiveObjectBase
                     {
                         playerTrans = other.GetComponent<Transform>();
                         UpdateFloorCount();
+                        other.GetComponent<PlayerInventory>().uiInventory.gameObject.SetActive(true);
                         StartCoroutine(waitBeforLoadNextScene(1, false));
                     }
                     else
@@ -65,6 +66,7 @@ public class Exit : InteractiveObjectBase
             {
                 playerTrans = other.GetComponent<Transform>();
                 playerTrans.GetComponent<Hunger>().enableHunger = true; //Enable Hunger in next level after level with NPC
+                other.GetComponent<PlayerInventory>().uiInventory.gameObject.SetActive(true);
                 StartCoroutine(waitBeforLoadNextScene(1,true));
             }
     }
